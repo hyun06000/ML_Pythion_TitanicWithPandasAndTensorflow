@@ -30,7 +30,7 @@ class DenseNet(tf.keras.Model):
         # =         --------------------------------------------
         # ======================================================
         self.dense_1_1 = Dense(
-            units              = 8,
+            units              = 64,
             activation         = None,
             use_bias           = USE_BIAS,
             kernel_initializer = KERNEL_INITIALIZER,
@@ -52,7 +52,7 @@ class DenseNet(tf.keras.Model):
         # =         --------------------------------------------
         # ======================================================
         self.dense_2_1 = Dense(
-            units              = 8,
+            units              = 32,
             activation         = None,
             use_bias           = USE_BIAS,
             kernel_initializer = KERNEL_INITIALIZER,
@@ -74,7 +74,7 @@ class DenseNet(tf.keras.Model):
         # =         --------------------------------------------
         # ======================================================
         self.dense_3_1 = Dense(
-            units              = 8,
+            units              = 16,
             activation         = None,
             use_bias           = USE_BIAS,
             kernel_initializer = KERNEL_INITIALIZER,
@@ -118,7 +118,7 @@ class DenseNet(tf.keras.Model):
         # =         --------------------------------------------
         # ======================================================
         self.dense_5_1 = Dense(
-            units              = 8,
+            units              = 4,
             activation         = None,
             use_bias           = USE_BIAS,
             kernel_initializer = KERNEL_INITIALIZER,
@@ -159,7 +159,7 @@ class DenseNet(tf.keras.Model):
     def call(self, inputs, training=False):
         
         x = inputs
-        
+        x = self.embedding(x)
         
         # =====================================================
         # =        --------------------------------------------
@@ -167,11 +167,11 @@ class DenseNet(tf.keras.Model):
         # =        --------------------------------------------
         # =====================================================
         
-        x = self.dense_1_1(inputs)
+        x = self.dense_1_1(x)
         x = self.bn_1_1(x, training)
         x = self.relu_1_1(x)
         
-        '''
+        
         # =====================================================
         # =        --------------------------------------------
         # = dense_2 ============================================
@@ -211,7 +211,7 @@ class DenseNet(tf.keras.Model):
         x = self.dense_5_1(inputs)
         x = self.bn_5_1(x, training)
         x = self.relu_5_1(x)
-        '''
+        
         # =====================================================
         # =       ---------------------------------------------
         # = DENSE =============================================
